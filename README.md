@@ -7,6 +7,8 @@ My reserach has been focused in studying association between alleles of Single N
 
 This repository has been divided in different folders 📁 (introduced here) depending on the material used in every phase. In each folder one can find input data, the code itself and output data. 
 
-## 📁 Inversions filtering
+## 📁 Inversions_filtering
+
+## 📁 LD_measures
 
 
