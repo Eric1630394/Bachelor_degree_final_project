@@ -9,10 +9,13 @@ This repository has been divided in different folders 📁 (introduced here) dep
 
 ## 📁 Input files
 
-This directory contains all the files that are passed to the different scripts (stored in the other two folders) to generate the results. These input data refers to:
+This directory contains all the files that are passed to the different scripts (stored in the other two folders), necessary to generate the results. These input data refers to:
 | Input file | Description |
 |------------|-------------|
+|invappend2_v2.in|
 |Inversions_coordinates_porubsky_v3.csv|
+|Genotyping_info.txt|
+|United3.ld|
 
 ## 📁 Inversions_filtering
 
