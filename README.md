@@ -32,6 +32,7 @@ Results coming from this filtering can be visualized in `Barplot_filtering.png` 
 ## 📁 LD_measures
 
 This directory stores information on the results generated after LD has already been calculated (information contained in `United3.ld`). A single script is used to visualize results, perform an statistic study and make the proper visaulization:
+
 |Scripts|Description|Necessary input files|
 |-------|-----------|---------------------|
 |`United3_plot_statistics.r`|reviews information for the LD values between polymorphic inversions (n=203) and SNPs (`United3.ld`)| `United3.ld` and `Inversions_coordinates_porubsky_v3.csv`|
