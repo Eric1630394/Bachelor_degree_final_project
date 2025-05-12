@@ -13,9 +13,9 @@ This directory contains all the files that are passed to the different scripts (
 | Input file | Description |
 |------------|-------------|
 |invappend2_v2.in|A list of all the inversions analysed in this study. This input file is passed to `Monomorphic_class.sh`.  
-|Inversions_coordinates_porubsky_v3.csv|
-|Genotyping_info.txt|
-|United3.ld|
+|Inversions_coordinates_porubsky_v3.csv|For every inversions, this file contains information for the chromosome, genomic coordinates for the breakpoints (BP1-1, BP1-2, BP2-1, BP2-2) and the flanking class. This file is passed to __
+|Genotyping_info.txt|Generated from `Monomorphic_class.sh`. It contains genotyping information for every inversions depending on the genotypes of the 43 samples analysed in this study. This file is passed to __
+|United3.ld|An unified file where, for every inversion, it is stored the SNP for which LD has been stablished, as well as the corresponding LD measure (column GLB). 
 
 ## 📁 Inversions_filtering
 
