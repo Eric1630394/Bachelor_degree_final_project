@@ -12,10 +12,10 @@ This repository has been divided in different folders 📁 (introduced here) dep
 This directory contains all the files that are passed to the different scripts (stored in the other two folders), necessary to generate the results. A general description and the usage of every file in this folder is attached here, ordered according to the different phases of the analysis:
 | Input file | Description |
 |------------|-------------|
-|invappend2_v2.in|A list of all the inversions analysed in this study. This input file is passed to `Monomorphic_class.sh`.  
-|Inversions_coordinates_porubsky_v3.csv|For every inversions, this file contains information for the chromosome, genomic coordinates for the breakpoints (BP1-1, BP1-2, BP2-1, BP2-2) and the flanking class. This file is passed to __
-|Genotyping_info.txt|Generated from `Monomorphic_class.sh`. It contains genotyping information for every inversions depending on the genotypes of the 43 samples analysed in this study. This file is passed to __
-|United3.ld|An unified file where, for every inversion, it is stored the SNP for which LD has been stablished, as well as the corresponding LD measure (column GLB). 
+|invappend2_v2.in|A list of all the inversions analysed in this study. This input file is passed to 🐚`Monomorphic_class.sh`.  
+|Inversions_coordinates_porubsky_v3.csv|For every inversion, this file contains information on the chromosome (2nd column), genomic coordinates for the breakpoints (BP1-1, BP1-2, BP2-1, BP2-2, columns 3-6) and the flanking class (7th column). This file is passed to 📊 `Inversions_filtering.r` and 📊 `United3_plot_statitsics.r`. 
+|Genotyping_info.txt|Output generated from 🐚 `Monomorphic_class.sh`. It contains genotyping information for every inversion depending on the genotypes of the 43 samples analysed in this study. Inversions are classified as: only 1 sample genotyped, chrY inversions, monomorphic and polymorphic. This file is the passed to 📊 `Inversions_filtering.r`. 
+|United3.ld|An unified file where, for every inversion, it is stored the chromosome (2nd column), the genomic position for the SNP (3rd column), the biallelic variants for that site (4th column) and the LD value (5th column). This file is the passed to 📊 `United3_plot_statistics.r`.
 
 ## 📁 Inversions_filtering
 
