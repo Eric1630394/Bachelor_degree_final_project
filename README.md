@@ -25,9 +25,9 @@ This directory stores those scripts and results generated for the inversions fil
 |Scripts|Description|Necessary input files|
 |-------|-----------|---------------------|
 |`Monomorphic_class.sh`|reviews information for the genotypes of the samples and generates an output, `Genotyping_info.txt`, with information for genotyping category.|`invappend2_v2.in`, `Porubsky_invs_callset_GT_v4.csv` and `Inversions_coordinates_porubsky_v3.csv`|
-|`Inversions_filtering.r`|makes the proper visualization of the results generated, shown in `Barplot_filtering.png`.|`Genotyping_info.txt` and `Inversions_coordinates_porubsky_v3.csv`|
+|`Inversions_filtering.r`|makes the proper visualization of the results generated, shown in `Barplot_filtering.png` and `Barplot_filtering_no_low.png`|`Genotyping_info.txt` and `Inversions_coordinates_porubsky_v3.csv`|
 
-Results coming from this filtering can be visualized in `Barplot_filtering.png`, where every category of inversions has been dividied in a different colour. The y-axis represents the proportion for the inversions in every category and the x-axis refers to every category depending on flanking information. 
+Results coming from this filtering can be visualized in `Barplot_filtering.png` and `Barplot_filtering_no_low.png` (depending on if low confidence genotypes have been considered or not), where every category of inversions has been dividied in a different colour. The y-axis represents the proportion for the inversions in every category and the x-axis refers to every category depending on flanking information. 
 
 ## 📁 LD_measures
 
