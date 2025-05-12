@@ -9,10 +9,10 @@ This repository has been divided in different folders 📁 (introduced here) dep
 
 ## 📁 Input files
 
-This directory contains all the files that are passed to the different scripts (stored in the other two folders), necessary to generate the results. These input data refers to:
+This directory contains all the files that are passed to the different scripts (stored in the other two folders), necessary to generate the results. A general description and the usage of every file in this folder is attached here, ordered according to the different phases of the analysis:
 | Input file | Description |
 |------------|-------------|
-|invappend2_v2.in|
+|invappend2_v2.in|A list of all the inversions analysed in this study. This input file is passed to `Monomorphic_class.sh`.  
 |Inversions_coordinates_porubsky_v3.csv|
 |Genotyping_info.txt|
 |United3.ld|
