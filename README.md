@@ -7,6 +7,13 @@ My reserach has been focused in studying association between alleles of Single N
 
 This repository has been divided in different folders 📁 (introduced here) depending on the material used in every phase. In each folder one can find the code itself and other files passed to the scripts or generated from them. 
 
+## 📁 Input files
+
+This directory contains all the files that are passed to the different scripts (stored in the other two folders) to generate the results. These input data refers to:
+| Input file | Description |
+|------------|-------------|
+
+
 ## 📁 Inversions_filtering
 
 ## 📁 LD_measures
