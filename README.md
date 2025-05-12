@@ -10,7 +10,7 @@ This repository has been divided in different folders 📁 (introduced here) dep
 ## 📁 Input files
 
 This directory contains all the files that are passed to the different scripts (stored in the other two folders), necessary to generate the results. A general description and the usage of every file in this folder is attached here, ordered according to the different phases of the analysis:
-| Input file | Description |
+| Input file 📖 | Description ✍️|
 |------------|-------------|
 |invappend2_v2.in|A list of all the inversions (n=254, after manual filtering) analysed in this study. This input file is passed to 🐚`Monomorphic_class.sh`.  
 |Inversions_coordinates_porubsky_v3.csv|For every inversion, this file contains information on the chromosome (2nd column), genomic coordinates for the breakpoints (BP1-1, BP1-2, BP2-1, BP2-2, columns 3-6) and the flanking class (7th column). This file is passed to 📊 `Inversions_filtering.r` and 📊 `United3_plot_statitsics.r`. 
