@@ -31,4 +31,15 @@ Results coming from this filtering can be visualized in `Barplot_filtering.png` 
 
 ## 📁 LD_measures
 
+This directory stores information on the results generated after LD has already been calculated (information contained in `United3.ld`). A single script is used to visualize results, perform an statistic study and make the proper visaulization:
+|Scripts|Description|Necessary input files|
+|-------|-----------|---------------------|
+|`United3_plot_statistics.r`|reviews information for the LD values between polymorphic inversions (n=203) and SNPs (`United3.ld`)| `United3.ld` and `Inversions_coordinates_porubsky_v3.csv`|
+
+As for the results, four images are attached here:
+  - `United3_ld_plot.png`: graph representing all the LD values (y-axis) for every SNP-inversion pair. A total of 180 inversions is shown in the x-axis (those with at least 1 SNP in LD > 0.35). These results have been divided by categories on flanking information.
+  - `Histogram.png`: distribution of the different LD values, divided by categories on flanking information. 
+  - `r2_values_perfect_ld.png`: inversions with SNPs in perefct LD. The y -axis represents the absolute count of SNPs for every inversion. These results have been divided by categories on flanking information.  
+  - `Barplot_comparison.png`: comparison between the original proportion of inversions for each flanking category and the proportion among inversions with at least 1 tagSNP. Asterisks indicate significance for the associated adjpval coming from the Fisher's Exact Test. 
+
 
