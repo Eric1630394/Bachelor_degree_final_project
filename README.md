@@ -12,7 +12,7 @@ This repository has been divided in different folders 📁 (introduced here) dep
 This directory contains all the files that are passed to the different scripts (stored in the other two folders) to generate the results. These input data refers to:
 | Input file | Description |
 |------------|-------------|
-
+|Inversions_coordinates_porubsky_v3.csv|
 
 ## 📁 Inversions_filtering
 
