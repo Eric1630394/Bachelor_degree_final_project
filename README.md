@@ -31,7 +31,7 @@ Results coming from this filtering can be visualized in `Barplot_filtering.png` 
 
 ## 📁 LD_measures
 
-This directory stores information on the results generated after LD has already been calculated (information contained in `United3.ld`). A single script is used to visualize results, perform an statistic study and make the proper visaulization:
+This directory stores information on the results generated after LD has already been calculated (information contained in `United3.ld`). A single script is used to make the proper visualization of the results and perform the appropriate statistic test:
 
 |Scripts|Description|Necessary input files|
 |-------|-----------|---------------------|
