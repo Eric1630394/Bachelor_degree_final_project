@@ -3,7 +3,7 @@ Hey!! 👋
 
 Let me introduce the content inside this repository. I am Eric Garcia, an undergraduate student of the Genetic's degree at the Universitat Autònoma de Barcelona (UAB) 🏛️. This year, as I face the completion of my studies, I am elaborating my bachelor's degree final project. 
 
-My research consisted in the evaluation of association between alleles of Single Nucleotide Polymorphisms (SNPs) and both orientations of polymorphic inversions (standard and inverted) found in the human genome. This was done by using the correlation coefficient (^r^2) as a measure of linkage disequilibrium (LD). So, with this objective in mind, I created a collection of shell 🐚 and R 📊 scripts to run my analyses and automatize the treatment of big-data datasets. 
+My research consisted in the evaluation of association between alleles of Single Nucleotide Polymorphisms (SNPs) and both orientations of polymorphic inversions (standard and inverted) found in the human genome. This was done by using the correlation coefficient (r²) as a measure of linkage disequilibrium (LD). So, with this objective in mind, I created a collection of shell 🐚 and R 📊 scripts to run my analyses and automatize the treatment of big-data datasets. 
 
 These scripts can be found in this repository by their classification on different folders 📁 depending on the material used in every phase. In each folder one can find the code itself and other files passed to the scripts or generated from them. 
 
