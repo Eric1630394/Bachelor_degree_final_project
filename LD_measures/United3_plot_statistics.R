@@ -1,6 +1,7 @@
 # Load necessary library
 library(ggplot2)
 library(dplyr)
+library(grid)
 
 # Read the tab-separated file where information for LD values is stored. 
 r2_values <- read.table("United3.ld", header=TRUE, sep="\t", stringsAsFactors=FALSE)
@@ -14,6 +15,18 @@ flanking_info <- flanking_info %>%
     V7 %in% c("IR") ~ "IR-flanked",
     V7 %in% c("LINE", "MEI-flanked", "SINE", "SVA", "TEs", "LTR") ~ "MEI-flanked",
     TRUE ~ V7
+  ))
+
+# Read the table contained in the .txt for the genotypes info. 
+class <- read.table("Genotyping_info.txt", header=FALSE, sep=",", stringsAsFactors=FALSE)
+
+#Transform information in the third column to specific values. 
+class <- class %>%
+  mutate(V3 = case_when(
+    V3 %in% c("0", "SD") ~ "SD-flanked",
+    V3 %in% c("IR") ~ "IR-flanked",
+    V3 %in% c("LINE", "MEI-flanked", "SINE", "SVA", "TEs", "LTR") ~ "MEI-flanked",
+    TRUE ~ V3
   ))
 
 #Count the number of inversions in each category:
@@ -74,40 +87,71 @@ r2_values <- r2_values %>%
 sorted_r2_values <- r2_values %>%
   mutate(Inv = factor(Inv, levels = unique(Inv[order(Type)])))
 
+category_colors <- c(
+  "SD-flanked" = "seagreen3",
+  "non-SD-flanked" = "paleturquoise4",
+  "MEI-flanked" = "turquoise3",
+  "IR-flanked" = "sienna3"
+)
+
 #Create a dot plot to visualize the r2 values for inversions and SNPs.
 plot_united <- ggplot(data = sorted_r2_values, mapping = aes(x = Inv, y = GLB, colour = Type)) +
   geom_point(size=3) + 
-  labs(title = "r2 values for inversions and SNPs",
-                      x = "Inversions",
-                      y = "r2 values") +
-  scale_color_manual(values = c("goldenrod1", "dodgerblue3","sienna","lightgreen")) +
+  labs(x = "Inversions",y = "r2 values") +
+  scale_color_manual(name = "Category", values = category_colors,  guide = guide_legend(byrow = TRUE)) +
   theme_minimal() +
   theme(
     plot.title = element_text(size = 30,hjust = 0.5),
-    axis.text.x = element_text(angle = 75, hjust = 1, size = 14, margin = margin(t = 10, b = 40)),  # Rotate and adjust x-axis labels
-    axis.title.x = element_text(margin = margin(t = 10),size = 25),  # Add space below x-axis title
-    axis.title.y = element_text(margin = margin(r = 10), size = 20),   # Add space to the left of y-axis title
-    legend.text = element_text(size=15),
-    legend.title = element_text(size=20),
+    axis.text.x = element_text(angle = 75, hjust = 1, size = 17, margin = margin(t = 10, b = 40)),  # Rotate and adjust x-axis labels
+    axis.title.x = element_text(margin = margin(t = 10),size = 30),  # Add space below x-axis title
+    axis.title.y = element_text(margin = margin(r = 10), size = 30),   # Add space to the left of y-axis title
+    legend.text = element_text(size=25),
+    legend.title = element_text(size=27),
+    legend.spacing.y = unit(20, "cm"),
+    legend.box = "vertical", 
+    axis.text.y = element_text(size=25)
 )
+
+plot_united <- ggplot(data = sorted_r2_values, mapping = aes(x = Inv, y = GLB, colour = Type)) +
+  geom_point(size = 3) + 
+  labs(x = "Inversions", y = "r2 values", title = NULL) +  # Remove title
+  scale_color_manual(
+    name = "Category",
+    values = category_colors,
+    guide = guide_legend(byrow = TRUE)
+  ) +
+  theme_minimal() +
+  theme(
+    plot.title = element_blank(),  # Ensure no title is shown
+    axis.text.x = element_text(angle = 75, hjust = 1, size = 17, margin = margin(t = 10, b = 40)),
+    axis.title.x = element_text(margin = margin(t = 10), size = 30),
+    axis.title.y = element_text(margin = margin(r = 10), size = 30),
+    legend.text = element_text(size = 25),
+    legend.title = element_text(size = 27),
+    legend.spacing.y = unit(20, "cm"),
+    legend.box = "vertical", 
+    axis.text.y = element_text(size = 25)
+  )
+
 
 ggsave(filename = "United3_ld_plot.png", plot = plot_united, width = 49, height = 20, bg = "white")
 
-#Create a boxplot to know the distribution of r2 values for each inversion type.
-boxplot <- ggplot(data = sorted_r2_values, mapping = aes(y = GLB, x = Type,fill=Type)) +
-  geom_boxplot() + theme_bw() + scale_fill_manual(values = c("goldenrod1", "dodgerblue3","sienna","lightgreen"))
-
-ggsave(filename = "Boxplot.png", plot = boxplot, width = 10, height = 10, bg = "white")
-
 #Also, to know the distribution of r2 values for each inversion type, create a histogram.
 histogram <- ggplot(data = sorted_r2_values, mapping = aes(x = GLB, fill = Type)) +
-  geom_histogram(color="black",binwidth = 0.015,linewidth=0.2) + scale_fill_manual(values = c("goldenrod1", "dodgerblue3","sienna","lightgreen")) +
-  scale_x_continuous(name = "r2 values") + 
-  ggtitle("Histogram on different r2 values",) + 
+  geom_histogram(color="black",binwidth = 0.03,linewidth=0.2) + scale_fill_manual(name = "Category", values = category_colors) + 
+  labs(x = "LD measures",
+       y = "Absolute count of SNPs") + 
   theme_light() +
-  theme(plot.title = element_text(size = 13,hjust = 0.5))
+  theme(
+    axis.text.x = element_text(size=20),
+    axis.text.y = element_text(size=20),
+    legend.text = element_text(size=15),
+    axis.title = element_text(size=25),
+    axis.title.x = element_text(size = 25),
+    legend.title = element_text(size=20)
+)
 
-ggsave(filename = "Histogram.png", plot = histogram, width = 10, height = 10, bg = "white")
+ggsave(filename = "Histogram.png", plot = histogram, width = 15, height = 15, bg = "white")
 
 #Generate an output containing five random rows from the dataset, just to visualize how data is organized. 
 random_rows <- sorted_r2_values %>% sample_n(5)
@@ -133,14 +177,19 @@ for (i in 1:nrow(count_data)) {
 r2_values_perfect_LD <- ggplot(count_data, aes(x = Inv, y = count, fill = Type)) +
   geom_bar(stat = "identity",color="black",linewidth=0.2) +
   theme_minimal() +
-  labs(title = "Inversions with r2 value = 1", x = "Inversions", y = "Total number") +
-  scale_fill_manual(values = c("dodgerblue3","sienna","lightgreen")) +
+  labs(x = "Inversions", y = "Absolute count of SNPs in perfect LD") +
+  scale_fill_manual(name = "Category", values = c("turquoise3","paleturquoise4","seagreen3")) +
   theme(
     plot.title = element_text(size = 10,hjust = 0.5),
-    axis.text.x = element_text(angle = 75, hjust = 1, size = 5, margin = margin(t = 10, b = 40)),
+    axis.text.x = element_text(angle=45,hjust = 1, size = 11.5, margin = margin(t = 10, b = 40)),
+    axis.text.y = element_text(size=7),
+    axis.title.x = element_text(size=15),
+    axis.title.y = element_text(size=15),
+    legend.title = element_text(size=15),
+    legend.text=element_text(size=12)
 )
 
-ggsave(filename = "r2_values_perfect_LD.png", plot = r2_values_perfect_LD, width = 8, height = 8, bg = "white")
+ggsave(filename = "r2_values_perfect_LD.png", plot = r2_values_perfect_LD, width = 22, height = 7,bg="white")
 
 #It is also interesting to study the representation of each inversion category among original data and inversions with at least 1 tagSNP.
 
@@ -169,7 +218,7 @@ MEI_flanked_r2_1_count <- length(unique(r2_1_MEI_flanked))
 IR_flanked_r2_1_count <- length(unique(r2_1_IR_flanked))
 
 #Then two vectors are defined depending on if original data or inversions with tagSNPs is considered.  
-original_count <- c(SD_flanked_count,non_SD_flanked_count,MEI_flanked_count,IR_flanked_count)
+original_count <- c(data_frame_merged$Counts_polymorphic[1],data_frame_merged$Counts_polymorphic[2],data_frame_merged$Counts_polymorphic[3],data_frame_merged$Counts_polymorphic[4])
 r2_1_count <- c(SD_flanked_r2_1_count,non_SD_flanked_r2_1_count,MEI_flanked_r2_1_count,IR_flanked_r2_1_count)
 
 #Create a data frame with counts stored in the previous two vectors. 
@@ -204,47 +253,45 @@ data_long <- proportions %>%
     values_to = "Count"
   )
 
-#Define colours for proper visualization:
-category_colors <- c(
-  "SD-flanked" = "lightgreen",
-  "non-SD-flanked" = "sienna",
-  "MEI-flanked" = "dodgerblue3",
-  "IR-flanked" = "goldenrod1"
-)
-
 #Make the proper visualization in a barplot. 
 barplot <- ggplot(data_long, aes(x = Category, y = Count, fill = Category, alpha = Count_Type)) +
-  geom_col(position = position_dodge(width = 0.8), width = 0.7,color="black",linewidth=0.5) +
+  geom_col(position = position_dodge(width = 0.8), width = 0.7, color = "black", linewidth = 0.5) +
   scale_fill_manual(
     name = "Category",
     values = category_colors,
-    guide = guide_legend(order = 1)  # Main legend first
+    guide = guide_legend(order = 1)
   ) +
   scale_alpha_manual(
-    name = "Count (number of inversions)",
+    name = "Group of inversions",
     values = c(Original_proportion = 1, Perfect_LD_proportion = 0.5),
     labels = c("Original", "At least 1 tagSNP"),
-    guide = guide_legend(order = 2)  # Secondary legend second
+    guide = guide_legend(order = 2)
   ) +
   labs(
-    title = "Number of original inversions vs inversions with at least 1 tagSNP",
-    x = "Category",
-    y = "Count (number of inversions)"
+    x = NULL,  # Removes x-axis title
+    y = "Proportion among the total of inversions",
+    title = NULL  # Removes plot title
   ) +
   theme_minimal() +
   theme(
-    axis.text.x = element_text(angle = 45, hjust = 1),
+    axis.text.x = element_text(angle = 0, hjust = 0.5, size = 15),
+    axis.text.y = element_text(size = 13),
+    axis.title.x = element_blank(),  # Also ensures x-axis title is blank
     legend.position = "top",
     legend.box = "horizontal",
-    legend.spacing.x = unit(0.5, "cm"),
-    plot.title = element_text(hjust=0.5)
+    legend.spacing.x = unit(1, "cm"),
+    legend.text = element_text(size = 10),
+    legend.title = element_text(size = 13),
+    plot.title = element_blank(),  # Ensures plot title is blank
+    axis.title.y = element_text(size = 15)
   ) +
   guides(
     fill = guide_legend(title.position = "top"),
     alpha = guide_legend(title.position = "top")
   )
 
-ggsave(filename = "Barplot_comparison.png", plot = barplot, width = 10, height = 10, bg = "white")
+
+ggsave(filename = "Barplot_comparison.png", plot = barplot, width = 10, height = 10,bg="white")
 
 #Test statistical differences with a Fisher's exact test. 
 
